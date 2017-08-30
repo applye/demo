@@ -23,8 +23,9 @@
     </div>
     <script type="text/javascript">
        var cont = document.querySelector("#content");
-       var markdown = marked(cont.innerHTML);
-       cont.innerHtml = markdown;     
+       var mark = cont.innerHTML;
+       var markdown = marked(mark);
+       cont.innerHTML = markdown; 
     </script>
 </body>
 
