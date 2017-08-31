@@ -1,0 +1,119 @@
+* {margin: 0;padding: 0;box-sizing: border-box}
+ul>li{
+    list-style: none;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+img {max-width: 100%;}
+
+/** page styles**/
+section.summary{
+    height:100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: chocolate;   
+}
+
+section.summary img.avatar {
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+}
+
+section.summary .text {
+    line-height: 2;
+    text-align: center;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+section.works { 
+    background: rgb(244, 244, 244);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+section.works .imageWrapper {
+    padding: 10px 10px 3px;
+    background: white;
+    text-align: right
+}
+
+section.works > ul {   
+    max-width: 800px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+@media (max-width:420px) {
+    section.works {
+        padding: 1em;       
+        min-height: 100vh;
+    }
+    section.works > ul {
+        justify-content: center;
+    }
+}
+
+
+section.works img {
+    max-width: 240px;
+    max-height: 420px;
+}
+
+
+section.works >ul h3 {
+    font-weight: normal;
+    font-size: 16px;
+    padding-left: 10px;
+    margin: 8px 0;
+}
+
+section.works > h2, section.contacts > h2 {
+    font-size: 32px;
+    margin-bottom: 1em;
+}
+
+section.skills {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 40px;
+}
+
+section.contacts {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    line-height: 2;
+}
+
+section.contacts > dl {
+    display: flex;
+    flex-wrap: wrap;
+    width: 20em;
+    margin-left: 20px;
+}
+
+section.contacts > dl a{
+   text-decoration: underline;
+}
+
+section.contacts >dl >dt {
+    width: 3em;
+}
+
+section.contacts >dl >dd {
+    width: 17em;
+}
