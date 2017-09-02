@@ -1,0 +1,103 @@
+.musicbox {
+    font-family: cursive, microsoft Yahei;
+    font-size: 16px;
+    color: #f06d6a;
+    border: 1px solid #30e00f;
+    border-radius: 20px;
+    width: 340px;
+    padding: 20px 20px 5px 20px;
+    -webkit-font-smoothing: antialiased;
+}
+
+.musicbox .control {
+    margin-top: 20px;
+    font-size: 22px;
+    color: #ee8a87;
+    float: left;
+}
+
+.musicbox .control .fa {
+    margin-left: 12px;
+    cursor: pointer;
+}
+
+.musicbox .control .fa.disable {
+    opacity: 0.3;
+}
+
+.musicbox .info {
+    margin-left: 120px;    
+}
+
+.musicbox .info .title {
+    font-size: 18px;
+}
+
+.musicbox .info .auther {
+    font-size: 13px;
+}
+
+.musicbox .progress {
+    width: 260px;
+}
+
+.musicbox .progress .bar {
+    height: 3px;
+    margin-top: 5px;
+    background-color: rgba(0, 0, 0, 0.2);
+    cursor:pointer; 
+}
+
+.musicbox .progress .progress-now {
+    background: #ee8a87;
+    height: 3px;
+    width: 0;
+    position: relative;
+}
+
+.musicbox .time {
+    text-align: right;
+}
+
+.musicbox:after, .musicbox .music:after {
+    content: '';
+    display: block;
+    clear: both
+}
+
+.musicbox .play_mode {
+    float: right;
+}
+
+/*设置滑动*/
+input[type=range] {
+    -webkit-appearance: none;
+    background: #cccccc;
+    height: 3px;
+    border: none;
+}
+
+/*去除边框*/
+input[type=range]:focus {
+    outline: none;
+}
+
+/*滑块设置样式*/
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 12px;
+    width: 12px;
+    margin-top: -2px;
+    border-radius: 50%;
+    background: #31C27C; 
+    border:1px solid #31C27C; /*设置边框*/
+    box-shadow: 0 .125em .125em #3b4547; /*添加底部阴影*/
+}   
+
+.voice input {
+ background: linear-gradient(to right, #9bafbe 0%, #9bafbe 100%);
+  background-position: center;
+  background-size: 99% 7px;
+  background-repeat: no-repeat;
+}
+
