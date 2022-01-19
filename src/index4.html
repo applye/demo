@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>调查表格</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: rgb(255, 243, 243);
+            color: rgba(0, 0, 0, 0.85);
+            font-size: 14px;
+        }
+        #root {
+            width: 1000px;
+            margin: 0 auto;
+            background: #ffff;
+            padding: 24px;
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border: 1px solid #1890ff;
+        }
+        #title {
+            color: #aa2fe8;
+        }
+        #description {
+            color: #333333a6;
+            padding: 5px 0px;
+        }
+        #survey-form {
+            width: 50%;
+            margin-top: 30px;
+        }
+        #survey-form > label {
+            display: flex;
+            align-items: center;
+        }
+        #survey-form > label > input {
+            height: 30px;
+            line-height: 30px;
+            display: inline-block;
+            flex: 1;
+            margin-left: 10px;
+        }
+        ::-webkit-input-placeholder {
+            color: rgba(0, 0, 0, 0.45);
+            font-size: 13px;
+        }
+        #dropdown {
+            height: 30px;
+            flex: 1;
+        }
+        .box > label {
+            display: inline-flex;
+            align-items: center;
+        }
+        .box > label:not(:first-child) {
+            margin-left: 18px;
+        }
+        .box > label > input {
+            margin-left: 5px;
+        }
+        #survey-form #desc {
+            align-items: flex-start;
+        }
+        #desc > textarea {
+            flex: 1;
+        }
+        #submit {
+            color: #fff;
+            width: 130px;
+            height: 32px;
+            line-height: 32px;
+            background: #2196F3;
+            box-shadow: none;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        #submit:hover {
+            background: rgba(33, 150, 243, 0.7);
+        }
+        .submit-cont {
+            text-align: right;
+        }
+    </style>
+
+</head>
+
+<body>
+    <main id="root">
+    <h1 id="title">调查表格</h1>
+    <p id="description">大一3班学生信息统计</p>
+    <form id="survey-form" >
+        <label for="name" id="name-label">
+            姓名:
+            <input autocomplete="off" id="name" type="text" name="user" placeholder="请输入姓名" required="required" />
+        </label>
+        <br>
+        <label for="email" id="email-label">
+            邮箱:
+            <input autocomplete="off" id="email" type="email" name="email" placeholder="请输入邮箱地址" required="required"/>
+        </label>
+        <br>
+        <label for="number" id="number-label">
+            年龄:
+            <input autocomplete="off" id="number" type="number" name="age" min="1" max="120" placeholder="请输入年龄"/>
+        </label>
+        <br>
+        <label for="dropdown">
+            职位：
+            <select id="dropdown" name="0">
+                <option value="0">语文课代表</option>
+                <option value="1">数学课代表</option>
+                <option value="2">英语课代表</option>
+                <option value="3">班长</option>
+                <option value="4">学生</option>
+            </select>
+        </label>
+        <br>
+        <div class="box">
+            性别：
+        <label for="boy">男 <input id="boy" type="radio" name="sex" value="boy" checked="checked"/></label>
+        <label for="grid">女 <input id="grid" type="radio" name="sex" value="grid"/></label>
+        </div>
+        <br>
+        <div class="box">
+            爱好：
+            <label for="zuqiu">足球<input type="checkbox" name="hobby" id="zuqiu" value="0"/></label>
+            <label for="draw">画画<input type="checkbox" name="hobby" id="draw" value="1"></label>
+            <label for="climb">爬山<input type="checkbox" name="hobby" id="climb" value="2"></label>
+            <label for="game">打游戏<input type="checkbox" name="hobby" id="game" value="3"></label>
+            <label for="read">读书<input type="checkbox" name="hobby" id="read" value="4"></label>
+        </div>
+        <br>
+        <label id="desc">
+            简介：
+            <textarea autocomplete="off" name="desc" id="desc" cols="30" rows="10" placeholder="请输入个人其它信息"></textarea>
+        </label>
+        <br>
+        <div class="submit-cont">
+            <input type="submit" id="submit" value="提交" />
+        </div>
+    </form>
+    </main>
+</body>
+</html>

@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>技术文档</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            color: rgba(0, 0, 0, 0.85);
+            font-size: 14px;
+            background: #f0f2f5;
+        }
+        a {
+            text-decoration: none;
+            color: #999;
+        }
+        a:hover {
+            color: #ccc;
+        }
+        .cont {
+            display: flex;
+        }
+        #navbar {
+            padding-left: 24px;
+            position: relative;
+            clear: both;
+            color: #999;
+            line-height: 1.5;
+            background-color: #001529;
+            border-right: 5px solid #ccc;
+            border-right: 5px solid #ccc;
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            width: 260px;
+            height: 100%;
+        }
+        #navbar header {
+            color: #999;
+            font-size: 24px;
+            padding: 10px 0;
+        }
+        .menu {
+            height: 88%;
+            padding: 0;
+            overflow-y: auto;
+            overflow-x: hidden;
+            margin-top: 20px;
+        }
+        .menu li {
+            list-style: none;
+            height: 40px;
+            line-height: 40px;
+        }
+        #main-doc {
+            flex: 1;
+            padding: 25px;
+            position: absolute;
+            left: 260px;
+        }
+        .main-section {
+            padding-top: 30px;
+        }
+        .main-section header {
+            color: rgba(0,0,0,.85);
+            font-size: 24px;
+        }
+        .main-section ul li {
+            list-style-type: circle;
+            margin-left: 20px;
+            padding-left: 4px;
+        }
+        .main-section p {
+            padding: 10px 0;
+            white-space: pre-line;
+        }
+        .main-section h3 {
+            padding: 10px 0;
+        }
+        .main-section xmp {
+            background: #000;
+            color: #fff;
+            padding: 10px 10px;
+            width: 100%;
+            background-color: #1d1f21;
+            white-space: pre-line;  
+        }
+        @media screen and (max-width:500px) {
+            #navbar {
+                display: none;
+            }
+            #main-doc {
+                left: 0px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav id="navbar">
+        <header>React 教程</header>
+        <ul class="menu">
+            <li><a href="#React_Hello_world" class="nav-link">React Hello world</a></li>
+            <li><a href="#React_install" class="nav-link">React install</a></li>
+            <li><a href="#React_render" class="nav-link">React render</a></li>
+            <li><a href="#React_jsx" class="nav-link">React jsx</a></li>
+            <li><a href="#React_zj" class="nav-link">React zj</a></li>
+        </ul>
+    </nav>
+    <main id="main-doc">
+        <section class="main-section" id="React_Hello_world">
+            <header>React Hello world</header>
+            <article>
+                <p>
+                    React 是一个用于构建用户界面的 JAVASCRIPT 库。
+
+                    React 主要用于构建UI，很多人认为 React 是 MVC 中的 V（视图）。
+
+                    React 起源于 Facebook 的内部项目，用来架设 Instagram 的网站，并于 2013 年 5 月开源。
+
+                    React 拥有较高的性能，代码逻辑非常简单，越来越多的人已开始关注和使用它。
+                </p>
+                <h3>React 特点</h3>
+                <ul>
+                    <li>声明式设计 −React采用声明范式，可以轻松描述应用。</li>
+                    <li>高效 −React通过对DOM的模拟，最大限度地减少与DOM的交互。</li>
+                    <li>灵活 −React可以与已知的库或框架很好地配合。</li>
+                    <li>JSX − JSX 是 JavaScript 语法的扩展。React 开发不一定使用 JSX ，但我们建议使用它。</li>
+                    <li>组件 − 通过 React 构建组件，使得代码更加容易得到复用，能够很好的应用在大项目的开发中。</li>
+                    <li>单向响应的数据流 − React 实现了单向响应的数据流，从而减少了重复代码，这也是它为什么比传统数据绑定更简单。</li>
+                </ul>
+                <h3>React 第一个实例</h3>
+                <p>本教程使用了 React 的版本为 16.4.0，你可以在官网 https://reactjs.org/ 下载最新版。</p>
+                <code>
+                    <xmp>
+                    <div id="example"></div>
+                    <script type="text/babel">
+                        ReactDOM.render(
+                        <h1>Hello, world!</h1>,
+                            document.getElementById('example')
+                        );
+                    </script>
+                    </xmp>
+                </code>
+            </article>
+        </section>
+        <section class="main-section" id="React_install">
+            <header>React install</header>
+            <article>
+                <p>React 可以直接下载使用，下载包中也提供了很多学习的实例。
+
+                    本教程使用了 React 的版本为 16.4.0，你可以在官网 https://reactjs.org/ 下载最新版。
+
+                    你也可以直接使用 Staticfile CDN 的 React CDN 库，地址如下：</p>
+                <code>
+                    <xmp>
+                    <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+                    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+                    <!-- 生产环境中不建议使用 -->
+                    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+                    </xmp>
+                </code>
+                <p>官方提供的 CDN 地址：</p>
+                <code>
+                    <xmp>
+                    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+                    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+                    <!-- 生产环境中不建议使用 -->
+                    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+                    </xmp>
+                </code>
+                <p>注意: 在浏览器中使用 Babel 来编译 JSX 效率是非常低的。
+
+                    使用实例
+                    以下实例输出了 Hello, world!</p>
+                <code>
+                    <xmp>
+                    <!DOCTYPE html>
+                    <html>
+
+                    <head>
+                        <meta charset="UTF-8" />
+                        <title>Hello React!</title>
+                        <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+                        <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+                        <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+                    </head>
+
+                    <body>
+
+                        <div id="example"></div>
+                        <script type="text/babel">
+                            ReactDOM.render(
+                        <h1>Hello, world!</h1>,
+                        document.getElementById('example')
+                    );
+                 </script>
+
+                    </body>
+
+                    </html>
+                    </xmp>
+                </code>
+                <p>实例解析：
+
+                    实例中我们引入了三个库： react.development.min.js 、react-dom.development.min.js 和 babel.min.js：
+
+                    react.min.js - React 的核心库
+                    react-dom.min.js - 提供与 DOM 相关的功能
+                    babel.min.js - Babel 可以将 ES6 代码转为 ES5 代码，这样我们就能在目前不支持 ES6 浏览器上执行 React 代码。Babel 内嵌了对 JSX 的支持。通过将
+                    Babel 和
+                    babel-sublime 包（package）一同使用可以让源码的语法渲染上升到一个全新的水平</p>
+                <code>
+                    <xmp>
+                    ReactDOM.render(
+                    <h1>Hello, world!</h1>,
+                    document.getElementById('example')
+                    );
+                    </xmp>
+                </code>
+                <p>以上代码将一个 h1 标题，插入 id="example" 节点中。</p>
+                <h3>通过 npm 使用 React</h3>
+                <p>
+                    如果你的系统还不支持 Node.js 及 NPM 可以参考我们的 Node.js 教程。
+
+                    我们建议在 React 中使用 CommonJS 模块系统，比如 browserify 或 webpack，本教程使用 webpack。
+
+                    国内使用 npm 速度很慢，你可以使用淘宝定制的 cnpm (gzip 压缩支持) 命令行工具代替默认的 npm:</p>
+                <code>
+                    <xmp>
+                    $ npm install -g cnpm --registry=https://registry.npm.taobao.org
+                    $ npm config set registry https://registry.npm.taobao.org
+                    </xmp>
+                </code>
+                <p>
+                    这样就可以使用 cnpm 命令来安装模块了：
+                </p>
+                <code>
+                    <xmp>
+                    $ cnpm install [name]
+                    </xmp>
+                </code>
+                <h3>使用 create-react-app 快速构建 React 开发环境</h3>
+                <p>
+                    create-react-app 是来自于 Facebook，通过该命令我们无需配置就能快速构建 React 开发环境。
+
+                    create-react-app 自动创建的项目是基于 Webpack + ES6 。
+
+                    执行以下命令创建项目：
+                </p>
+                <code>
+                    <xmp>
+                    $ cnpm install -g create-react-app
+                    $ create-react-app my-app
+                    $ cd my-app/
+                    $ npm start
+                    </xmp>
+                </code>
+            </article>
+        </section>
+        <section class="main-section" id="React_render">
+            <header>React render</header>
+            <article>
+                <p>元素是构成 React 应用的最小单位，它用于描述屏幕上输出的内容。</p>
+                <code>
+                    <xmp>
+                    const element = <h1>Hello, world!</h1>;
+                    </xmp>
+                </code>
+                <p>
+                    与浏览器的 DOM 元素不同，React 当中的元素事实上是普通的对象，React DOM 可以确保 浏览器 DOM 的数据内容与 React 元素保持一致。
+
+                    将元素渲染到 DOM 中
+                    首先我们在一个 HTML 页面中添加一个 id="example" 的 <div>:
+                </p>
+                <code>
+                    <xmp>
+                    <div id="example"></div>
+                    </xmp>
+                </code>
+                <p>在此 div 中的所有内容都将由 React DOM 来管理，所以我们将其称为 "根" DOM 节点。
+
+                    我们用 React 开发应用时一般只会定义一个根节点。但如果你是在一个已有的项目当中引入 React 的话，你可能会需要在不同的部分单独定义 React 根节点。
+
+                    要将React元素渲染到根DOM节点中，我们通过把它们都传递给 ReactDOM.render() 的方法来将其渲染到页面上：</p>
+                <code>
+                    <xmp>
+                    const element = <h1>Hello, world!</h1>;
+                    ReactDOM.render(
+                    element,
+                    document.getElementById('example')
+                    );
+                    </xmp>
+                </code>
+                <p>更新元素渲染
+                    React 元素都是不可变的。当元素被创建之后，你是无法改变其内容或属性的。
+
+                    目前更新界面的唯一办法是创建一个新的元素，然后将它传入 ReactDOM.render() 方法：
+
+                    来看一下这个计时器的例子</p>
+                <code>
+                    <xmp>
+                    function tick() {
+                    const element = (
+                    <div>
+                        <h1>Hello, world!</h1>
+                        <h2>现在是 {new Date().toLocaleTimeString()}.</h2>
+                    </div>
+                    );
+                    ReactDOM.render(
+                    element,
+                    document.getElementById('example')
+                    );
+                    }
+
+                    setInterval(tick, 1000);
+                    </xmp>
+                </code>
+                <p>以上实例通过 setInterval() 方法，每秒钟调用一次 ReactDOM.render()。
+
+                    我们可以将要展示的部分封装起来，以下实例用一个函数来表示：
+
+                </p>
+                <code>
+                    <xmp>
+                    function Clock(props) {
+                    return (
+                    <div>
+                        <h1>Hello, world!</h1>
+                        <h2>现在是 {props.date.toLocaleTimeString()}.</h2>
+                    </div>
+                    );
+                    }
+
+                    function tick() {
+                    ReactDOM.render(
+                    <Clock date={new Date()} />,
+                    document.getElementById('example')
+                    );
+                    }
+
+                    setInterval(tick, 1000);
+                    </xmp>
+                </code>
+                <p>除了函数外我们还可以创建一个 React.Component 的 ES6 类，该类封装了要展示的元素，需要注意的是在 render() 方法中，需要使用 this.props 替换 props：
+                </p>
+                <code>  
+                    <xmp>
+                    class Clock extends React.Component {
+                    render() {
+                    return (
+                    <div>
+                        <h1>Hello, world!</h1>
+                        <h2>现在是 {this.props.date.toLocaleTimeString()}.</h2>
+                    </div>
+                    );
+                    }
+                    }
+
+                    function tick() {
+                    ReactDOM.render(
+                    <Clock date={new Date()} />,
+                    document.getElementById('example')
+                    );
+                    }
+
+                    setInterval(tick, 1000);
+                    </xmp>
+                </code>
+            </article>
+        </section>
+        <section class="main-section" id="React_jsx">
+            <header>React jsx</header>
+            <article>
+                <p>React 使用 JSX 来替代常规的 JavaScript。
+
+                    JSX 是一个看起来很像 XML 的 JavaScript 语法扩展。
+
+                    我们不需要一定使用 JSX，但它有以下优点：</p>
+                <ul>
+                    <li>JSX 执行更快，因为它在编译为 JavaScript 代码后进行了优化。</li>
+                    <li>它是类型安全的，在编译过程中就能发现错误。</li>
+                    <li>使用 JSX 编写模板更加简单快速。</li>
+                </ul>
+                <p>我们先看下以下代码：</p>
+                <code>
+                    <xmp>
+                    const element = <h1>Hello, world!</h1>;
+                    </xmp>
+                </code>
+                <p>这种看起来可能有些奇怪的标签语法既不是字符串也不是 HTML。
+
+                    它被称为 JSX， 一种 JavaScript 的语法扩展。 我们推荐在 React 中使用 JSX 来描述用户界面。
+
+                    JSX 是在 JavaScript 内部实现的。
+
+                    我们知道元素是构成 React 应用的最小单位，JSX 就是用来声明 React 当中的元素。
+
+                    与浏览器的 DOM 元素不同，React 当中的元素事实上是普通的对象，React DOM 可以确保 浏览器 DOM 的数据内容与 React 元素保持一致。
+
+                    要将 React 元素渲染到根 DOM 节点中，我们通过把它们都传递给 ReactDOM.render() 的方法来将其渲染到页面上：</p>
+                <code>
+                    <xmp>
+                    var myDivElement =
+                    <div className="foo" />;
+                    ReactDOM.render(myDivElement, document.getElementById('example'));
+                    </xmp>
+                </code>
+                <h3>使用 JSX</h3>
+                <p>JSX 看起来类似 HTML ，我们可以看下实例:</p>
+                <code>
+                    <xmp>
+                    ReactDOM.render(
+                    <h1>Hello, world!</h1>,
+                    document.getElementById('example')
+                    );
+                    </xmp>
+                </code>
+                <p>我们可以在以上代码中嵌套多个 HTML 标签，需要使用一个 div 元素包裹它，实例中的 p 元素添加了自定义属性 data-myattribute，添加自定义属性需要使用 data- 前缀。</p>
+                <code>
+                    <xmp>
+                    ReactDOM.render(
+                    <div>
+                        <h1>教程</h1>
+                        <h2>欢迎学习 React</h2>
+                        <p data-myattribute="somevalue">这是一个很不错的 JavaScript 库!</p>
+                    </div>
+                    ,
+                    document.getElementById('example')
+                    );
+                    </xmp>
+                </code>
+                <p>独立文件
+                    你的 React JSX 代码可以放在一个独立文件上，例如我们创建一个 helloworld_react.js 文件，代码如下：</p>
+                <code>
+                    <xmp>
+                    ReactDOM.render(
+                    <h1>Hello, world!</h1>,
+                    document.getElementById('example')
+                    );
+                    </xmp>
+                </code>
+
+                <p>然后在 HTML 文件中引入该 JS 文件：</p>
+                <code>
+                    <xmp>
+                    <body>
+                        <div id="example"></div>
+                        <script type="text/babel" src="helloworld_react.js"></script>
+                    </body>
+                    </xmp>
+                </code>
+                <p>我们可以在 JSX 中使用 JavaScript 表达式。表达式写在花括号 {} 中。实例如下：</p>
+                <code>
+                    <xmp>
+                    ReactDOM.render(
+                    <div>
+                        <h1>{1+1}</h1>
+                    </div>
+                    ,
+                    document.getElementById('example')
+                    );
+                    </xmp>
+                </code>
+                <p>在 JSX 中不能使用 if else 语句，但可以使用 conditional (三元运算) 表达式来替代。以下实例中如果变量 i 等于 1 浏览器将输出 true, 如果修改 i 的值，则会输出
+                    false.</p>
+                <code>
+                    <xmp>
+                    ReactDOM.render(
+                    <div>
+                        <h1>{i == 1 ? 'True!' : 'False'}</h1>
+                    </div>
+                    ,
+                    document.getElementById('example')
+                    );
+                    </xmp>
+                </code>
+                <p>React 推荐使用内联样式。我们可以使用 camelCase 语法来设置内联样式. React 会在指定元素数字后自动添加 px 。以下实例演示了为 h1 元素添加 myStyle 内联样式：</p>
+                <code>
+                    <xmp>
+                    var myStyle = {
+                    fontSize: 100,
+                    color: '#FF0000'
+                    };
+                    ReactDOM.render(
+                    <h1 style={myStyle}>菜鸟教程</h1>,
+                    document.getElementById('example')
+                    );
+                    </xmp>
+                </code>
+                <p>注释需要写在花括号中，实例如下：</p>
+                <code>
+                    <xmp>
+                    ReactDOM.render(
+                    <div>
+                        <h1>菜鸟教程</h1>
+                        {/*注释...*/}
+                    </div>,
+                    document.getElementById('example')
+                    );
+                    </xmp>
+                </code>
+                <p>JSX 允许在模板中插入数组，数组会自动展开所有成员：</p>
+                <code>
+                    <xmp>
+                    var arr = [
+                    <h1>菜鸟教程</h1>,
+                    <h2>学的不仅是技术，更是梦想！</h2>,
+                    ];
+                    ReactDOM.render(
+                    <div>{arr}</div>,
+                    document.getElementById('example')
+                    );
+                    </xmp>
+                </code>
+            </article>
+        </section>
+        <section class="main-section" id="React_zj">
+            <header>React zj</header>
+            <article>
+                <p>本章节我们将讨论如何使用组件使得我们的应用更容易来管理。
+
+                    接下来我们封装一个输出 "Hello World！" 的组件，组件名为 HelloMessage：</p>
+                <code>
+                    <xmp>
+                    function HelloMessage(props) {
+                    return <h1>Hello World!</h1>;
+                    }
+
+                    const element =
+                    <HelloMessage />;
+
+                    ReactDOM.render(
+                    element,
+                    document.getElementById('example')
+                    );
+                    </xmp>
+                </code>
+
+                <p>实例解析：
+                    1、我们可以使用函数定义了一个组件：</p>
+                <code>
+                    <xmp>
+                    function HelloMessage(props) {
+                    return <h1>Hello World!</h1>;
+                    }
+                    </xmp>
+                </code>
+                <p>你也可以使用 ES6 class 来定义一个组件:</p>
+                <code>
+                    <xmp>
+                    class Welcome extends React.Component {
+                    render() {
+                    return <h1>Hello World!</h1>;
+                    }
+                    }
+                    </xmp>
+                </code>
+                <p>const element =
+                    <HelloMessage /> 为用户自定义的组件。
+                    如果我们需要向组件传递参数，可以使用 this.props 对象,实例如下：
+                </p>
+                <code>
+                    <xmp>
+                    function HelloMessage(props) {
+                    return <h1>Hello {props.name}!</h1>;
+                    }
+
+                    const element =
+                    <HelloMessage name="Runoob" />;
+
+                    ReactDOM.render(
+                    element,
+                    document.getElementById('example')
+                    );
+                    </xmp>
+                </code>
+                <p>以上实例中 name 属性通过 props.name 来获取。</p>
+                <p>复合组件
+                    我们可以通过创建多个组件来合成一个组件，即把组件的不同功能点进行分离。
+
+                    以下实例我们实现了输出网站名字和网址的组件：</p>
+                <code>
+                    <xmp>
+                    function Name(props) {
+                    return <h1>网站名称：{props.name}</h1>;
+                    }
+                    function Url(props) {
+                    return <h1>网站地址：{props.url}</h1>;
+                    }
+                    function Nickname(props) {
+                    return <h1>网站小名：{props.nickname}</h1>;
+                    }
+                    function App() {
+                    return (
+                    <div>
+                        <Name name="菜鸟教程" />
+                        <Url url="http://www.runoob.com" />
+                        <Nickname nickname="Runoob" />
+                    </div>
+                    );
+                    }
+                    ReactDOM.render(
+                    <App />,
+                    document.getElementById('example')
+                    );
+                    </xmp>
+                </code>
+            </article>
+        </section>
+    </main>
+    <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+</body>
+
+</html>

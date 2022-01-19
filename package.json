@@ -1,5 +1,5 @@
 {
-  "name": "blog",
+  "name": "demo",
   "version": "1.0.0",
   "description": "我的博客",
   "main": "build.js",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/applye/blog.git"
+    "url": "git+https://github.com/applye/demo.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/applye/blog/issues"
+    "url": "https://github.com/applye/demo/issues"
   },
-  "homepage": "https://github.com/applye/blog#readme",
+  "homepage": "https://github.com/applye/demo#readme",
   "dependencies": {
     "marked": "^0.3.6"
   }

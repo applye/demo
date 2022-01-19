@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>drag 拖动</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .box {
+            position: relative;
+            margin: 50px auto;
+            width: 500px;
+            height: 500px;
+            border: 1px solid #3F51B5;;
+            overflow: hidden;
+        }
+        .avatar {
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+            left: 50px;
+            top: 50px;
+            transform: translate(100px, 100px);
+        }
+        .avatar img {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="avatar">
+            <img src="../images/avatar1.jpg" draggable="false">
+        </div>
+    </div>
+    <script>
+        /**
+         * 1.平移 translate
+            transform:translate(x,y)
+            transform:matrix(1,0,0,1,x,y)
+
+            2.缩放 scale
+            transform:scale(x,y)
+            transform:matrix(x,0,0,y,0,0)
+
+            3.旋转 rotate
+            transform:rotate(x)
+            transform:matrix(cos(x),-sin(x),sin(x),cos(x),0,0)
+
+            4.拉伸 skew
+            transform:skew(x,y)
+            transform:matrix(1,tan(y),tan(x),1,0,0)
+        *
+        */
+        let oBox = document.querySelector('.box');
+        let oDiv = document.querySelector('.avatar');
+        let x; // 鼠标按下时图片相对浏览器的位置
+        let y; // 鼠标按下时图片相对浏览器的位置
+        let DElTA = 1.1 // 每次放大、缩小的倍数
+
+        const mouseDown = e => {
+            let transf = getTransform(oDiv);
+            x = e.clientX - transf.transX;
+            y = e.clientY - transf.transY;
+            document.addEventListener('mousemove', mouseMove);
+            document.addEventListener('mouseup', mouseUp);
+        }
+
+        const mouseMove = e => {
+            let multiple = getTransform(oDiv).multiple;
+            let moveX = e.clientX - x // x向移动距离
+            let moveY = e.clientY - y // y向移动距离
+            let newTransf = limitBorder(oDiv, oBox, moveX, moveY, multiple);
+            oDiv.style.transform = `matrix(${multiple}, 0, 0, ${multiple}, ${newTransf.transX}, ${newTransf.transY})`; 
+        }
+
+        const mouseUp = () => {
+            document.removeEventListener('mousemove', mouseMove);
+            document.removeEventListener('mouseup', mouseUp);
+        }
+
+        const getTransform = DOM => {
+            let arr = getComputedStyle(DOM).transform.split(',');
+            return {
+                transX: isNaN(+arr[arr.length-2]) ? 0 : + arr[arr.length-2], // translateX
+                transY: isNaN(+arr[arr.length-1].split(')')[0]) ? 0 : +arr[arr.length - 1].split(')')[0],
+                multiple: +arr[3]  // 缩放
+            }
+        }
+
+        // 滚轮缩放， 更新transform
+        const zoom = e => {
+            let transf = getTransform(oDiv);
+            if(e.deltaY < 0) {
+                transf.multiple *= DElTA;
+            }else {
+                transf.multiple /= DElTA;
+            }
+            let newTransf = limitBorder(oDiv, oBox, transf.transX, transf.transY, transf.multiple);
+            oDiv.style.transform = `matrix(${transf.multiple}, 0, 0, ${transf.multiple}, ${newTransf.transX}, ${newTransf.transY})`; 
+        }
+
+        const limitBorder = (innerDom, outerDom, moveX, moveY, multiple) => {
+            let { clientWidth: innerWidth, clientHeight: innerHeight, offsetLeft: innerLeft, offsetTop: innerTop } = innerDom;
+            let { clientWidth: outerWidth, clientHeight: outerHeight } = outerDom;
+            let transX;
+            let transY;
+            // 放大的图片超过box时 图片最多拖动到与边框对齐
+            if(innerWidth * multiple > outerWidth || innerHeight * multiple > outerHeight) {
+                if(innerWidth * multiple > outerWidth && innerWidth * multiple > outerHeight) {
+                    transX = Math.min(Math.max(moveX, outerWidth - innerWidth * (multiple + 1)/2 -innerLeft), -innerLeft+innerWidth*(multiple-1)/2);
+                    transY = Math.min(Math.max(moveY, outerHeight - innerHeight * (multiple + 1)/2 - innerTop), -innerTop+innerHeight*(multiple-1)/2);
+                }else if(innerWidth * multiple > outerWidth && !(innerWidth * multiple > outerHeight)) {
+                    transX = Math.min(Math.max(moveX, outerWidth - innerWidth * (multiple + 1)/2 -innerLeft),  -innerLeft + innerWidth * (multiple - 1) / 2);
+                    transY = Math.max(Math.min(moveY, outerHeight - innerHeight * (multiple + 1) / 2 - innerTop), -innerTop + innerHeight * (multiple - 1) / 2);
+                }else if (!(innerWidth * multiple > outerWidth) && innerWidth * multiple > outerHeight){
+                    transX = Math.max(Math.min(moveX, outerWidth - innerWidth * (multiple + 1) / 2 - innerLeft), -innerLeft + innerWidth * (multiple - 1) / 2);
+                    transY = Math.min(Math.max(moveY, outerHeight - innerHeight * (multiple + 1) / 2 - innerTop), -innerTop + innerHeight * (multiple - 1) / 2);
+                }
+            }else {
+                // 图片小于box大小时 图片不能拖出边框
+                transX = Math.max(Math.min(moveX, outerWidth - innerWidth * (multiple+1)/2 -innerLeft), -innerLeft + innerWidth * (multiple-1)/2);
+                transY = Math.max(Math.min(moveY, outerHeight - innerHeight * (multiple+1)/2 - innerTop), -innerTop + innerHeight * (multiple-1)/2);
+            }
+            return { transX, transY }
+        }
+
+        const init = () => {
+            document.addEventListener('selectstart', e => e.preventDefault())
+            // 鼠标按下事件
+            oDiv.addEventListener('mousedown', mouseDown)
+            // 图片缩放
+            oDiv.addEventListener('wheel', zoom)
+        }
+        init();
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使用 CSS 和 HTML 创建更复杂的形状</title>
+    <style>
+        .heart {
+            position: absolute;
+            margin: auto;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-color: pink;
+            height: 150px;
+            width: 150px;
+            transform: rotate(-45deg);
+        }
+        .heart::after {
+            background-color: pink;
+            content: "";
+            border-radius: 50%;
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            top: 0px;
+            left: 75px;
+        }
+        .heart::before {
+            content: "";
+            background-color: pink;
+            border-radius: 50%;
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            top: -75px;
+            left: 0px;
+        }
+    </style>
+</head>
+<body>
+    <div class="heart"></div>
+</body>
+</html>
