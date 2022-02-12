@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/applye/demo#readme",
   "dependencies": {
-    "marked": "^0.3.6"
+    "marked": "^4.0.12"
   }
 }

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>blog</title>
+    <link rel="stylesheet" href="../css/typo.css">
+    <script type="text/javascript" src="https://cdn.bootcss.com/marked/0.3.6/marked.js"></script>
+<style type="text/css">
+    body {
+        box-sizing: border-box;
+        min-width: 200px;
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 45px;
+    }
+</style>
+</head>
+<body>
+    <div>
+        <h3 id="jwt-使用教程">jwt 使用教程</h3>
+<ol>
+<li><p>jwt简介</p>
+<ul>
+<li><a href="https://jwt.io/">JWT</a>(Json Web Token)是实现token技术的一种解决方案,JWT由三部分组成：header(头)、payload(载体)、signature(签名).</li>
+</ul>
+</li>
+<li><p>用法</p>
+<ul>
+<li>jwt.sign(payload, secretOrPrivateKey, [options, callback])</li>
+</ul>
+<p>（异步）如果提供回调，则使用err或JWT 调用回调。
+（同步）将JsonWebToken返回为字符串。</p>
+<p> payload必须是一个object, buffer或者string。请注意， exp只有当payload是object字面量时才可以设置。
+ secretOrPrivateKey 是包含HMAC算法的密钥或RSA和ECDSA的PEM编码私钥的string或buffer。
+ options: 
+     * algorithm：加密算法（默认值：HS256）</p>
+<pre><code> * expiresIn：以秒表示或描述时间跨度zeit / ms的字符串。如60，&quot;2 days&quot;，&quot;10h&quot;，&quot;7d&quot;，Expiration time，过期时间
+
+ * notBefore：以秒表示或描述时间跨度zeit / ms的字符串。如：60，&quot;2days&quot;，&quot;10h&quot;，&quot;7d&quot;
+
+ * audience：Audience，观众
+
+ * issuer：Issuer，发行者
+
+ * jwtid：JWT ID
+
+ * subject：Subject，主题
+
+ * noTimestamp
+
+ * header
+</code></pre>
+<p> 如果payload不是buffer或string，它将被强制转换为使用的字符串JSON.stringify()。
+ 在expiresIn，notBefore，audience，subject，issuer没有默认值时。也可以直接在payload中用exp，nbf，aud，sub和iss分别表示，但是你不能在这两个地方同时设置。
+ 请记住exp，nbf，iat是NumericDate类型。
+ 生成的jwts通常会包含一个iat值除非指定了noTimestamp。如果iat插入payload中，则将使用它来代替实际的时间戳来计算其他事情，诸如options.expiresIn给定一个exp这样的时间间隔。</p>
+<pre><code>iss：Issuer，发行者 
+sub：Subject，主题
+aud：Audience，观众
+exp：Expiration time，过期时间
+nbf：Not before
+iat：Issued at，发行时间
+jti：JWT ID
+</code></pre>
+<pre><code>// sign with default (HMAC SHA256)
+var jwt = require(&#39;jsonwebtoken&#39;);
+var token = jwt.sign({ foo: &#39;bar&#39; }, &#39;shhhhh&#39;);
+//backdate a jwt 30 seconds
+var older_token = jwt.sign({ foo: &#39;bar&#39;, iat: Math.floor(Date.now() / 1000) - 30 }, &#39;shhhhh&#39;);
+
+// sign with RSA SHA256
+var cert = fs.readFileSync(&#39;private.key&#39;);  // get private key
+var token = jwt.sign({ foo: &#39;bar&#39; }, cert, { algorithm: &#39;RS256&#39;});
+
+// sign asynchronously
+jwt.sign({ foo: &#39;bar&#39; }, cert, { algorithm: &#39;RS256&#39; }, function(err, token) {
+  console.log(token);
+});
+</code></pre>
+<p> Token Expiration (exp claim)</p>
+<p> 签署1小时期限的token:</p>
+<pre><code>jwt.sign({
+  exp: Math.floor(Date.now() / 1000) + (60 * 60),
+  data: &#39;foobar&#39;
+}, &#39;secret&#39;);
+</code></pre>
+<p> 使用此库生成令牌的另一种方法是:</p>
+<pre><code>jwt.sign({
+  data: &#39;foobar&#39;
+}, &#39;secret&#39;, { expiresIn: 60 * 60 });
+
+//or even better:
+
+jwt.sign({
+  data: &#39;foobar&#39;
+}, &#39;secret&#39;, { expiresIn: &#39;1h&#39; });
+</code></pre>
+<ul>
+<li>jwt.verify（token，secretOrPublicKey，[options，callback]）
+ 验证token的合法性</li>
+</ul>
+</li>
+<li><p>利用Nodejs搭建简单的Token验证</p>
+<ul>
+<li>安装jsonwebtoken<pre><code>npm i jsonwebtoken
+</code></pre>
+</li>
+<li>Nodejs结合验证<pre><code> const express = require(&#39;express&#39;);
+ const jwt = require(&#39;jsonwebtoken&#39;);
+ let app = express();
+ app.listen(5000,()=&gt;{console.log(&#39;Server start port 5000&#39;)});
+ app.get(&#39;/api&#39; , (req,res) =&gt; {
+     res.json({
+         &#39;status&#39;: 200,
+         &#39;msg&#39; : &#39;访问成功&#39;
+     });
+ });
+ app.post(&#39;/api/login&#39;, (req, res) =&gt; {
+     /*
+         iss:签发人
+         iat:签发时间回溯30s
+         exp:过期时间 这里可是使用秒数,也可以使用day
+         &quot;{&quot;jti&quot;:1,&quot;iss&quot;:&quot;gumt.top&quot;,&quot;user&quot;:&quot;goolge&quot;,&quot;iat&quot;:1555650413,&quot;exp&quot;:1555657613}&quot;
+         &quot;iat&quot;: ~~(Date.now() / 1000)-30,
+         &quot;exp&quot;: ~~(Date.now() / 1000)+(60*60),
+     */
+   const user = {
+     &quot;jti&quot;: 1,
+         &quot;iss&quot;: &quot;gumt.top&quot;,
+         &quot;user&quot;: &quot;goolge&quot;,
+   }
+     jwt.sign(user,&quot;secretkey&quot;,{ expiresIn: &#39;1day&#39; },(err,token) =&gt; {
+         res.json({
+             token
+         })
+     })
+ });
+ app.post(&#39;/api/posts&#39;,verifyToken,(req,res) =&gt; {
+   jwt.verify(req.token, &#39;secretkey&#39;, (err, authData) =&gt; {
+     if(err) {
+        res.sendStatus(403);
+       } else {
+         res.json({
+           message: &#39;Post created...&#39;,
+           authData
+         });
+      }
+   });
+ });
+ function verifyToken(req, res, next) {
+   const bearerHeader = req.headers[&#39;authorization&#39;];
+   if(typeof bearerHeader !== &#39;undefined&#39;) {
+     const bearer = bearerHeader.split(&#39; &#39;);
+     const bearerToken = bearer[1];
+     req.token = bearerToken;
+     next();
+   } else {
+     res.sendStatus(403);
+   }
+ }
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+
+    </div>
+</body>
+</html>
